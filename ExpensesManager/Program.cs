@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using System.Threading.Channels;
+using ExpensesManager.Data;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -66,7 +67,11 @@ namespace ExpensesManager
 
             Console.WriteLine(new string('-', 15));
             Console.Write("Choose a menu number: ");
-           
+            ExpenseDbContext db = new ExpenseDbContext();
+            foreach (var VARIABLE in db.Bills)
+            {
+                Console.WriteLine(VARIABLE.Name);
+            }
             while (true)
             {
                 string command = Console.ReadLine();
