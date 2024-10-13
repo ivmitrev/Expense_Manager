@@ -6,14 +6,16 @@ namespace ExpensesManager.Data;
 
 public class ExpenseDbContext : DbContext
 {
-    private readonly IConfiguration configuration;
     public ExpenseDbContext() { }
+  
     public ExpenseDbContext(DbContextOptions<ExpenseDbContext> options)
         : base(options) { }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql(configuration.GetConnectionString("DatabasePg"));
+        // It's not a good practice to show the connection string here but we use local database
+        // For security measures we can put connection strings in appsettings.json
+        optionsBuilder.UseNpgsql("Host=localhost;Username=postgres;Password=ADMIN;Database=ExpenseManager");
     }
 
     public DbSet<Bill> Bills { get; set; }
